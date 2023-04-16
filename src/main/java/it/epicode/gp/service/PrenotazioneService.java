@@ -28,8 +28,7 @@ public class PrenotazioneService {
 	public void createAndSaveParamPrenotazione(LocalDate data, Utente u, Postazione pos) {
 		// se controllare se la postazione è gia prenotata per quella data
 		// controllare se l'uteten ha gia una prenotazione per quella data
-
-		// controllare se la data non è passata
+        // controllare se la data non è passata
 		// controllare se la postazione è libera
 		if (data.isAfter(LocalDate.now())) {
 			if (pos.getStatoPostazione() == StatoPostazione.LIBERO) {

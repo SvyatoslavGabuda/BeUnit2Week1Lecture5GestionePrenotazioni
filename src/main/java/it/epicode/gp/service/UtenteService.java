@@ -17,23 +17,39 @@ public class UtenteService {
 	@Autowired
 	@Qualifier("FakeUser")
 	private ObjectProvider<Utente> fakeUtenteProvider;
+	@Autowired
+	@Qualifier("ParamsUser")
+	private ObjectProvider<Utente> paramUtenteProvider;
 
 	public void createAndSaveFakeUtente(int n) {
-		for(int i=0; i<n; i++) {
-	saveUtente(fakeUtenteProvider.getObject());}
+		for (int i = 0; i < n; i++) {
+			saveUtente(fakeUtenteProvider.getObject());
+		}
 	}
-	//lo stesso metodo per update
+	public void createAndSaveParamUtente(String username, String name, String lastname, String email) {
+		
+			saveUtente(paramUtenteProvider.getObject(username, name, lastname, email));
+		
+	}
+
+	// lo stesso metodo per update
 	public void saveUtente(Utente u) {
 		uRepo.save(u);
 	}
+	public void updateUtente(Utente u) {
+		uRepo.save(u);
+	}
+
 	public Utente findUtenteById(Long id) {
 		return uRepo.findById(id).get();
 	}
-	public List<Utente> findAllUtente(){
+
+	public List<Utente> findAllUtente() {
 		return (List<Utente>) uRepo.findAll();
 	}
+
 	public void removeUtente(Utente u) {
 		uRepo.delete(u);
 	}
-	
+
 }

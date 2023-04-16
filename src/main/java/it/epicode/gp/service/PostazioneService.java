@@ -63,4 +63,7 @@ public class PostazioneService {
 	public List<Postazione> findPostazioneByTipo(TipoPostazione t) {
 		return posRepo.findByTipoPostazione(t);
 	}
+	public List<Postazione> findPostazioneByTipoAndCitta(TipoPostazione t,String citta) {
+		return posRepo.findPostazioneByTipoAndCitta(t,citta);
+	}
 }
