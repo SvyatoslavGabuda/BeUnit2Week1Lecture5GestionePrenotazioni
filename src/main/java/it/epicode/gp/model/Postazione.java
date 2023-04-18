@@ -2,11 +2,15 @@ package it.epicode.gp.model;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import it.epicode.gp.enums.StatoPostazione;
 import it.epicode.gp.enums.TipoPostazione;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -36,9 +40,11 @@ public class Postazione {
 	@Enumerated(EnumType.STRING)
 	private StatoPostazione statoPostazione;
 	private int nMaxOccupanti;
+	@JsonBackReference
 	@ManyToOne
 	private Edificio edificio;
-	@OneToMany(mappedBy = "postazione")
+	@JsonManagedReference
+	@OneToMany(mappedBy = "postazione", fetch = FetchType.EAGER)
 	private List<Prenotazione> prenotazione;
 	
 

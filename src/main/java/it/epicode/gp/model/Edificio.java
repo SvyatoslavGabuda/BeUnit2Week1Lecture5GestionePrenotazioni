@@ -3,8 +3,11 @@ package it.epicode.gp.model;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -27,8 +30,10 @@ public class Edificio {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 private Long id_edificio;
 private String nome;
+@JsonManagedReference
 @OneToOne
 private Indirizzo indirizzo;
-@OneToMany(mappedBy = "edificio",cascade = CascadeType.REMOVE)
+@JsonManagedReference
+@OneToMany(mappedBy = "edificio",cascade = CascadeType.REMOVE, fetch = FetchType.EAGER)
 private List<Postazione> postazioni;
 }

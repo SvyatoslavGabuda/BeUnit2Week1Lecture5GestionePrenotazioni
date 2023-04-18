@@ -31,21 +31,21 @@ public class GestionePrenotazioni implements CommandLineRunner {
 		log.warn("Runner Start");
 
 		// Metodo che crea utenti "fake" un numero di volte
-		uService.createAndSaveFakeUtente(100);
+//		uService.createAndSaveFakeUtente(100);
 
 		// Creazione utente tramite paramentri:
 		// uService.createAndSaveParamUtente("mario1993", "Mario", "ROssi",
 		// "mario.rossi@example.it");
 
 		// Creazione Edifici "fake" n numero di volte
-		edService.createAndSaveRandomEdificio(100);
+//		edService.createAndSaveRandomEdificio(100);
 
 		// Creazione Edificio con paramentri inseriti:
 		// Scommentare una volta per poter trovare risultati della query di ricerca
 		// edService.createAndSaveParamEdificio("NomeEdificio","Roma","via Appia",5 );
 
 		// metodo che genera da 0 a 5 postazione per ogni edificio trovato nel DB
-		posService.createAndSaveRandomPostazioneForAllEdificio();
+//		posService.createAndSaveRandomPostazioneForAllEdificio();
 
 		// creazioni Prenotazioni ->
 		// non tutte andranno a buon fine la prima volta è fatto apposta per testare i
@@ -68,14 +68,14 @@ public class GestionePrenotazioni implements CommandLineRunner {
 //		preService.createAndSaveParamPrenotazione(LocalDate.of(2023,12,1), uService.findUtenteById(7l), posService.findPostazioneById(4l));
 //		preService.createAndSaveParamPrenotazione(LocalDate.of(2023,12,3), uService.findUtenteById(8l), posService.findPostazioneById(4l));
 //		preService.createAndSaveParamPrenotazione(LocalDate.of(2023,12,3), uService.findUtenteById(9l), posService.findPostazioneById(6l));
+//		preService.createAndSaveParamPrenotazione(LocalDate.of(2024,12,3), uService.findUtenteById(9l), posService.findPostazioneById(6l));
 
 		// Query richiesta dalla traccia:
-		posService.findPostazioneByTipoAndCitta(TipoPostazione.PRIVATO, "Roma")
-				.forEach(p -> System.out.println(p.getId_postazione() + " " + p.getDescrizione() + " "
-						+ p.getEdificio().getNome() + " " + p.getEdificio().getIndirizzo().getCitta()));
-		;
-		
-		
+//		posService.findPostazioneByTipoAndCitta(TipoPostazione.PRIVATO, "Roma")
+//				.forEach(p -> System.out.println(p.getId_postazione() + " " + p.getDescrizione() + " "
+//						+ p.getEdificio().getNome() + " " + p.getEdificio().getIndirizzo().getCitta()));
+//		;
+//		
 		
 		
 	

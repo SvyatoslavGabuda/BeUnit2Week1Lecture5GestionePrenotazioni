@@ -2,6 +2,8 @@ package it.epicode.gp.model;
 
 import java.time.LocalDate;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -30,9 +32,11 @@ public class Prenotazione {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id_prenotazione;
+	@JsonBackReference
 	@ManyToOne
 	@JoinColumn(nullable = false)
 	private Utente utente;
+	@JsonBackReference
 	@ManyToOne
 	@JoinColumn(nullable = false)
 	private Postazione postazione;

@@ -2,7 +2,11 @@ package it.epicode.gp.model;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -27,7 +31,10 @@ public class Utente {
 	private String name;
 	private String lastname;
 	private String email;
-	@OneToMany(mappedBy = "utente")
+	
+	//@JsonIgnore
+	@JsonManagedReference
+	@OneToMany(mappedBy = "utente", fetch = FetchType.EAGER)
 	private List<Prenotazione> prenotazioni;
 
 	public Utente(String username, String name, String lastname, String email) {
