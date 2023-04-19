@@ -40,10 +40,10 @@ public class Postazione {
 	@Enumerated(EnumType.STRING)
 	private StatoPostazione statoPostazione;
 	private int nMaxOccupanti;
-	@JsonBackReference
+	@JsonBackReference(value ="edificio_postazione")
 	@ManyToOne
 	private Edificio edificio;
-	@JsonManagedReference
+	@JsonManagedReference(value = "postazione_prenotazione")
 	@OneToMany(mappedBy = "postazione", fetch = FetchType.EAGER)
 	private List<Prenotazione> prenotazione;
 	

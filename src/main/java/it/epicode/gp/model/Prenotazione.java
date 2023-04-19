@@ -32,11 +32,11 @@ public class Prenotazione {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id_prenotazione;
-	@JsonBackReference
+	@JsonBackReference(value = "utente_prenotazione")
 	@ManyToOne
 	@JoinColumn(nullable = false)
 	private Utente utente;
-	@JsonBackReference
+	@JsonBackReference(value = "postazione_prenotazione")
 	@ManyToOne
 	@JoinColumn(nullable = false)
 	private Postazione postazione;

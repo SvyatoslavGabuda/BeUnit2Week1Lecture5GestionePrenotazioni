@@ -9,6 +9,8 @@ import org.springframework.stereotype.Service;
 
 import it.epicode.gp.model.Utente;
 import it.epicode.gp.repo.UtenteDaoRepo;
+import jakarta.persistence.EntityExistsException;
+import jakarta.persistence.EntityNotFoundException;
 
 @Service
 public class UtenteService {
@@ -26,22 +28,37 @@ public class UtenteService {
 			saveUtente(fakeUtenteProvider.getObject());
 		}
 	}
+
 	public void createAndSaveParamUtente(String username, String name, String lastname, String email) {
-		
-			saveUtente(paramUtenteProvider.getObject(username, name, lastname, email));
-		
+
+		saveUtente(paramUtenteProvider.getObject(username, name, lastname, email));
+
 	}
 
-	// lo stesso metodo per update
 	public void saveUtente(Utente u) {
 		uRepo.save(u);
+
 	}
+
+	public Utente createUtente(Utente u) {
+		saveUtente(u);
+		return u;
+	}
+
 	public void updateUtente(Utente u) {
-		uRepo.save(u);
+		if (!uRepo.existsById(u.getId_utente())) {
+			throw new EntityNotFoundException("User not exists!!!");
+		} else {
+			uRepo.save(u);
+		}
 	}
 
 	public Utente findUtenteById(Long id) {
-		return uRepo.findById(id).get();
+		if (!uRepo.existsById(id)) {
+			throw new EntityNotFoundException("User not exists!!!");
+		} else {
+			return uRepo.findById(id).get();
+		}
 	}
 
 	public List<Utente> findAllUtente() {
@@ -49,7 +66,20 @@ public class UtenteService {
 	}
 
 	public void removeUtente(Utente u) {
-		uRepo.delete(u);
+		if (!uRepo.existsById(u.getId_utente())) {
+			throw new EntityNotFoundException("User not exists!!!");
+		} else {
+			uRepo.delete(u);
+		}
+	}
+
+	public String removeUtenteById(Long id) {
+		if (!uRepo.existsById(id)) {
+			throw new EntityNotFoundException("User not exists!!!");
+		} else {
+			uRepo.deleteById(id);
+			return "Utente eliminato";
+		}
 	}
 
 }

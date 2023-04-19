@@ -13,8 +13,5 @@ public class LanguageExeption extends Exception {
 		super(msg);
 	}
 
-//	@ExceptionHandler(Exception.class)
-//	ResponseEntity<String> langueageEx(LanguageExeption e) {
-//		return new ResponseEntity<String>(e.getMessage() + " langueageEx!", HttpStatus.NOT_FOUND);
-//	}
+
 }

@@ -3,6 +3,7 @@ package it.epicode.gp.model;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import jakarta.persistence.CascadeType;
@@ -30,10 +31,11 @@ public class Edificio {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 private Long id_edificio;
 private String nome;
-@JsonManagedReference
-@OneToOne
+@JsonManagedReference(value = "edificio_indirizzo")
+@OneToOne(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
 private Indirizzo indirizzo;
-@JsonManagedReference
-@OneToMany(mappedBy = "edificio",cascade = CascadeType.REMOVE, fetch = FetchType.EAGER)
+//@JsonIgnoreProperties()
+@JsonManagedReference(value ="edificio_postazione")
+@OneToMany(mappedBy = "edificio",cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 private List<Postazione> postazioni;
 }

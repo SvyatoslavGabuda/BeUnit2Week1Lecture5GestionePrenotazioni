@@ -4,6 +4,7 @@ package it.epicode.gp.model;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
@@ -29,7 +30,7 @@ private Long id_indirizzo;
 private String citta;
 private String via;
 private int n_civico;
-@JsonBackReference
-@OneToOne(mappedBy = "indirizzo", fetch = FetchType.EAGER)
+@JsonBackReference(value = "edificio_indirizzo")
+@OneToOne(mappedBy = "indirizzo", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 private Edificio edificio;
 }

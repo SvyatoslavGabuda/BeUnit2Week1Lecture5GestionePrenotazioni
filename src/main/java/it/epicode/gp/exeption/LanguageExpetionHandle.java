@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 
 @ControllerAdvice
 public class LanguageExpetionHandle {
-	@ExceptionHandler(Exception.class)
+	@ExceptionHandler(LanguageExeption.class)
 	ResponseEntity<String> langueageEx(LanguageExeption e) {
 		return new ResponseEntity<String>(e.getMessage() + " langueageEx!", HttpStatus.NOT_FOUND);
 	}
