@@ -20,4 +20,8 @@ public class EntityExceptionHandler extends ResponseEntityExceptionHandler {
 	ResponseEntity<String> manageEntityNotFoundException(EntityNotFoundException e) {
 		return new ResponseEntity<String>(e.getMessage(), HttpStatus.NOT_FOUND);
 	}
+	@ExceptionHandler(Exception.class)
+	ResponseEntity<String> generalEx(Exception e) {
+		return new ResponseEntity<String>(e.getMessage(), HttpStatus.NOT_FOUND);
+	}
 }

@@ -25,7 +25,7 @@ public class PrenotazioneService {
 	@Qualifier("ParamPrenotazione")
 	private ObjectProvider<Prenotazione> paramPrenotazioneProvider;
 
-	public void createAndSaveParamPrenotazione(LocalDate data, Utente u, Postazione pos) {
+	public String createAndSaveParamPrenotazione(LocalDate data, Utente u, Postazione pos) {
 		// se controllare se la postazione è gia prenotata per quella data
 		// controllare se l'uteten ha gia una prenotazione per quella data
         // controllare se la data non è passata
@@ -36,18 +36,23 @@ public class PrenotazioneService {
 					if (findPrenotazioneByDataAndUtente(data, u) == null) {
 						savePrenotazione(paramPrenotazioneProvider.getObject(data, u, pos));
 						System.out.println("Prenotazione eseguita con sucesso");
+						return "Prenotazione eseguita con sucesso";
 					} else {
 						log.error("L' utente ha gia una prenotazione per quella data");
+						return "L' utente ha gia una prenotazione per quella data";
 					}
 
 				} else {
 					log.error("La postazione è gia PRENOTATA per la data richiesta");
+					return "La postazione è gia PRENOTATA per la data richiesta";
 				}
 			} else {
 				log.error("la Postazione NON è disponibile");
+				return "la Postazione NON è disponibile";
 			}
 		} else {
 			log.error("la DATA inserita è già passata, non è previsto che puoi viaggiare nel tempo.");
+			return "la DATA inserita è già passata, non è previsto che puoi viaggiare nel tempo.";
 		}
 
 	}

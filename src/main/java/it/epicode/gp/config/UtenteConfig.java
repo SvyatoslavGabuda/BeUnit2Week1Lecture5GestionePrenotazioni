@@ -27,6 +27,7 @@ public class UtenteConfig {
 		u.setLastname(fake.name().lastName());
 		u.setEmail(u.getName() + "." + u.getLastname() + "@example.com");
 		u.setUsername(u.getName()+"."+u.getLastname());
+		u.setPassword("1234");
 		return u;
 	}
 }

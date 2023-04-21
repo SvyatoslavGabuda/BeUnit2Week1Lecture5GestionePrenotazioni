@@ -3,6 +3,7 @@ package it.epicode.gp.model;
 import java.time.LocalDate;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -32,11 +33,13 @@ public class Prenotazione {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id_prenotazione;
-	@JsonBackReference(value = "utente_prenotazione")
+	//@JsonBackReference(value = "utente_prenotazione")
+	@JsonIgnoreProperties("prenotazioni")
 	@ManyToOne
 	@JoinColumn(nullable = false)
 	private Utente utente;
-	@JsonBackReference(value = "postazione_prenotazione")
+	//@JsonBackReference(value = "postazione_prenotazione")
+	@JsonIgnoreProperties("prenotazione")
 	@ManyToOne
 	@JoinColumn(nullable = false)
 	private Postazione postazione;

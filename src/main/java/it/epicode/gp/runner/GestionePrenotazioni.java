@@ -31,7 +31,7 @@ public class GestionePrenotazioni implements CommandLineRunner {
 		log.warn("Runner Start");
 
 		// Metodo che crea utenti "fake" un numero di volte
-//		uService.createAndSaveFakeUtente(100);
+	//	uService.createAndSaveFakeUtente(100);
 
 		// Creazione utente tramite paramentri:
 		// uService.createAndSaveParamUtente("mario1993", "Mario", "ROssi",
