@@ -1,13 +1,19 @@
 package it.epicode.gp.runner;
 
 import java.time.LocalDate;
+import java.util.HashSet;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
+import it.epicode.gp.enums.RoleType;
 import it.epicode.gp.enums.TipoPostazione;
+import it.epicode.gp.model.Edificio;
 import it.epicode.gp.model.Indirizzo;
+import it.epicode.gp.model.Role;
+import it.epicode.gp.repo.RoleRepository;
 import it.epicode.gp.service.EdificioService;
 import it.epicode.gp.service.PostazioneService;
 import it.epicode.gp.service.PrenotazioneService;
@@ -25,10 +31,15 @@ public class GestionePrenotazioni implements CommandLineRunner {
 	PostazioneService posService;
 	@Autowired
 	PrenotazioneService preService;
-
+	@Autowired
+	RoleRepository roleRepo;
+	private Set<Role> adminRole;
+	private Set<Role> moderatorRole;
+	private Set<Role> userRole;
 	@Override
 	public void run(String... args) throws Exception {
 		log.warn("Runner Start");
+		//setRoleDefault();
 
 		// Metodo che crea utenti "fake" un numero di volte
 	//	uService.createAndSaveFakeUtente(100);
@@ -39,6 +50,7 @@ public class GestionePrenotazioni implements CommandLineRunner {
 
 		// Creazione Edifici "fake" n numero di volte
 //		edService.createAndSaveRandomEdificio(100);
+//	edService.createAndSaveRandomEdificio2(100);
 
 		// Creazione Edificio con paramentri inseriti:
 		// Scommentare una volta per poter trovare risultati della query di ricerca
@@ -76,11 +88,41 @@ public class GestionePrenotazioni implements CommandLineRunner {
 //						+ p.getEdificio().getNome() + " " + p.getEdificio().getIndirizzo().getCitta()));
 //		;
 //		
-		
-		
+//		edService.findAllEdificio().forEach(e -> {
+//		e.setCodice((int)Math.random()*900000+"");
+//		edService.upDateEdificio(e);
+//		});
+	//	Edificio e = edService.findEdificioById(1l);
+//		e.setCodice("1233454");
+//		edService.upDateEdificio(e);
 	
 
 		log.warn("Runner End");
+	}
+	private void setRoleDefault() {
+		Role admin = new Role();
+		admin.setRoleType(RoleType.ROLE_ADMIN);
+		roleRepo.save(admin);
+		
+		Role user = new Role();
+		user.setRoleType(RoleType.ROLE_USER);
+		roleRepo.save(user);
+		
+		Role moderator = new Role();
+		moderator.setRoleType(RoleType.ROLE_MODERATOR);
+		roleRepo.save(moderator);
+		
+		adminRole = new HashSet<Role>();
+		adminRole.add(admin);
+		adminRole.add(moderator);
+		adminRole.add(user);
+		
+		moderatorRole = new HashSet<Role>();
+		moderatorRole.add(moderator);
+		moderatorRole.add(user);
+		
+		userRole = new HashSet<Role>();
+		userRole.add(user);
 	}
 
 }

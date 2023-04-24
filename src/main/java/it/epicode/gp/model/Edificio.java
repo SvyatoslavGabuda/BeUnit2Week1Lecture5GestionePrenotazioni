@@ -6,7 +6,9 @@ import java.util.List;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
+import it.epicode.gp.auth.security.SecretCodeConverter;
 import jakarta.persistence.CascadeType;
+import jakarta.persistence.Convert;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
@@ -18,11 +20,17 @@ import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 
 @NoArgsConstructor
 @AllArgsConstructor
-@Data
+//@Data
+@Setter
+@Getter
+@ToString
 @Builder
 @Entity
 @Table(name = "edifici")
@@ -32,10 +40,12 @@ public class Edificio {
 private Long id_edificio;
 private String nome;
 @JsonManagedReference(value = "edificio_indirizzo")
-@OneToOne(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
+@OneToOne(fetch = FetchType.EAGER)
 private Indirizzo indirizzo;
 //@JsonIgnoreProperties()
 @JsonManagedReference(value ="edificio_postazione")
 @OneToMany(mappedBy = "edificio",cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 private List<Postazione> postazioni;
+@Convert(converter = SecretCodeConverter.class)
+private String codice;
 }

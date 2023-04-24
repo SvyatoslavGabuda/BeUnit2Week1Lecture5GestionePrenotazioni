@@ -8,6 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -22,7 +23,7 @@ import it.epicode.gp.model.Utente;
 import it.epicode.gp.service.PostazioneService;
 import it.epicode.gp.service.PrenotazioneService;
 import jakarta.websocket.server.PathParam;
-
+@CrossOrigin(origins = "*", maxAge = 3600)
 @Controller
 @RequestMapping("/prenotazione")
 public class PrenotazioneController {

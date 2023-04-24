@@ -3,6 +3,7 @@ package it.epicode.gp.service;
 
 import java.util.List;
 
+import org.hibernate.boot.model.source.internal.hbm.CompositeIdentifierSingularAttributeSourceManyToOneImpl;
 import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -34,6 +35,11 @@ public class EdificioService {
 			saveEdificio(randomEdificioProvider.getObject());
 		}
 	}
+	public void createAndSaveRandomEdificio2(int n) {
+		for (int i = 0; i < n; i++) {
+			saveEdificioAndIndirizzo(randomEdificioProvider.getObject());
+		}
+	}
 	public void createAndSaveParamEdificio(String name, String citta,String via, int n) {
 		
 			saveEdificio(paramEdificioProvider.getObject(name,citta,via,n));
@@ -46,8 +52,12 @@ public class EdificioService {
 		edificioRepo.save(e);
 		
 	}
+	public void upDateEdificio(Edificio e) {
+		edificioRepo.save(e);
+	}
 	public String saveEdificioAndIndirizzo(Edificio e) {
 		Indirizzo i = inRepo.save(e.getIndirizzo());
+		System.out.println(i);
 		e.setIndirizzo(i);
 		edificioRepo.save(e);
 		return "edificio salvato";

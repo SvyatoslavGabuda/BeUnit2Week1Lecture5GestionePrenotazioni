@@ -33,6 +33,7 @@ public class EdificioConfig {
 		Edificio e = new Edificio();
 		e.setNome(fake.name().fullName() + " Palace");
 		e.setIndirizzo(randomIndirizzo());
+		e.setCodice(fake.number().numberBetween(10000, 900000)+"");
 
 		return e;
 	}
